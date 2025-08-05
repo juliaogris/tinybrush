@@ -1,6 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  distDir: "docs",
+  output: "export",
+  basePath: "/tinybrush",
   // Ensure proper development server configuration
   webpack: (config, { dev, isServer }) => {
     if (dev) {
@@ -12,41 +15,41 @@ const nextConfig: NextConfig = {
         aggregateTimeout: 200,
         // Ignore paths that don't need watching
         ignored: [
-          '**/node_modules',
-          '**/.git',
-          '**/.next',
-          '**/dist',
-          '**/build',
-          '**/.turbo',
-          '**/coverage',
+          "**/node_modules",
+          "**/.git",
+          "**/.next",
+          "**/dist",
+          "**/build",
+          "**/.turbo",
+          "**/coverage",
         ],
-      }
-      
+      };
+
       // Use default Next.js caching to avoid warnings
       // Custom cache config was causing compiled config warnings
-      
+
       // Keep default source maps to avoid Next.js warnings
       // Next.js handles devtool optimization internally
     }
-    return config
+    return config;
   },
 
   // Inject build timestamp into environment
   env: {
     BUILD_TIMESTAMP: new Date().toISOString(),
   },
-  
+
   // Allow cross-origin requests in development
-  allowedDevOrigins: ['172.24.178.199'],
-  
+  allowedDevOrigins: ["172.24.178.199"],
+
   // Server configuration
   async rewrites() {
-    return []
+    return [];
   },
-  
+
   // Ensure assets are served correctly
-  assetPrefix: process.env.NODE_ENV === 'production' ? '' : '',
-  
+  assetPrefix: process.env.NODE_ENV === "production" ? "" : "",
+
   // Removed experimental features that were causing instability
   // experimental: {
   //   forceSwcTransforms: true,
